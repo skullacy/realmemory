@@ -34,19 +34,22 @@ public class IntroActivity extends Activity {
 	
 	Handler h;
 	private static String phoneNum;
+	static TextView loadingMsg;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_intro);
 		
+		loadingMsg = (TextView) findViewById(R.id.loading_msg);
+		
 		//현재 핸드폰의 전화번호 가져오기
 		TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 		phoneNum = tm.getLine1Number();
 		
 		//어드민 테스트용 admin_nosignup : 디버그모드(등록안됨), admin_signup : 디버그모드(회원가입)
-		phoneNum = "admin_nosignup";
-		//phoneNum = "admin_signup";
+		//phoneNum = "admin_nosignup";
+		phoneNum = "admin_signup";
 		
 		h = new Handler();
 		h.postDelayed(irun, 1000);
@@ -55,12 +58,14 @@ public class IntroActivity extends Activity {
 	
 	Runnable irun = new Runnable() {
 		public void run() {
+			IntroActivity.loadingMsg.setText("서버와 통신하고 있습니다.");
+			
 			//전송할 파라미터 생성
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("module", "realmemory"));
 			params.add(new BasicNameValuePair("phone", phoneNum.toString()));
 			
-			//json 스레드 실행
+			//json 스레드 실행(서버접속 후 계정확인)
 			new JsonLoadingTask().execute(params);
 		}
 	};
@@ -131,12 +136,19 @@ public class IntroActivity extends Activity {
 				
 				//닉네임 생성 액티비티로 이동
 				if(next_act.equals("regnickname")){
-					Intent i = new Intent(IntroActivity.this, MainActivity.class);
+					Intent i = new Intent(IntroActivity.this, RegnickActivity.class);
 					startActivity(i);
 					finish();
 					overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 				}
 				//사진보기 액티비티로 이동
+				else if(next_act.equals("photolist")){
+					Intent i = new Intent(IntroActivity.this, MainActivity.class);
+					startActivity(i);
+					finish();
+					overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+				}
+					
 				
 			}
 			catch(JSONException e)
