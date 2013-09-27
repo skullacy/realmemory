@@ -73,7 +73,6 @@ public class MainActivity extends Activity {
 			return false;
 		}
     	
-		Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     	return true;
     	
     }
