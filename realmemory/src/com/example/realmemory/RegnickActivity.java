@@ -22,7 +22,6 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -43,7 +42,7 @@ public class RegnickActivity extends Activity {
 		RegnickActivity.phoneNum = phoneNum;
 	}
 	
-	static String nickname;
+	static String nick_name;
 	
 	ProgressDialog dialog;
 	AlertDialog.Builder alertDialog;
@@ -66,7 +65,7 @@ public class RegnickActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				EditText nick = (EditText) findViewById(R.id.nickname);
-				nickname = nick.getText().toString();
+				nick_name = nick.getText().toString();
 				regThread();
 			}
 		});
@@ -85,7 +84,7 @@ public class RegnickActivity extends Activity {
 					params.add(new BasicNameValuePair("module", "realmemory"));
 					params.add(new BasicNameValuePair("act", "procRealmemoryInsertNickname"));
 					params.add(new BasicNameValuePair("phone", phoneNum.toString()));
-					params.add(new BasicNameValuePair("nickname", nickname));
+					params.add(new BasicNameValuePair("nick_name", nick_name));
 					
 					//서버에 계정 등록
 					String line = getStringFromUrl("http://skullacytest.cafe24.com/", params);

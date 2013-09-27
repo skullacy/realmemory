@@ -27,7 +27,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.Menu;
 import android.widget.*;
 
 public class IntroActivity extends Activity {
@@ -43,13 +42,14 @@ public class IntroActivity extends Activity {
 		
 		loadingMsg = (TextView) findViewById(R.id.loading_msg);
 		
-		//현재 핸드폰의 전화번호 가져오기sadfjkaslkgjsalkdfjaslkdhglskdjfaslkdfjsalkfdjjasdgasfasgsadfasdgasdfgasdfasfasf
+		//현재 핸드폰의 전화번호 가져오기
 		TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 		phoneNum = tm.getLine1Number();
 		
 		//어드민 테스트용 admin_nosignup : 디버그모드(등록안됨), admin_signup : 디버그모드(회원가입)
-		phoneNum = "admin_nosignup";
+		//phoneNum = "admin_nosignup";
 		//phoneNum = "admin_signup";
+		phoneNum = "01083696664";
 		
 		h = new Handler();
 		h.postDelayed(irun, 1000);
@@ -144,6 +144,9 @@ public class IntroActivity extends Activity {
 				//사진보기 액티비티로 이동
 				else if(next_act.equals("photolist")){
 					Intent i = new Intent(IntroActivity.this, MainActivity.class);
+					i.putExtra("phoneNum", jsonobj.getString("phone"))
+						.putExtra("member_srl", jsonobj.getString("member_srl"))
+						.putExtra("nick_name", jsonobj.getString("nick_name"));
 					startActivity(i);
 					finish();
 					overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
