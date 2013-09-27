@@ -33,6 +33,7 @@
 
         </activity>
         <activity android:name="RegnickActivity"></activity>
+        <activity android:name="AddImageActivity"></activity>
     </application>
 
 </manifest>
