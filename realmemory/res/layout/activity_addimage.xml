@@ -79,7 +79,7 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="20dp"
 	            android:text="기억에 남는 일을 간단히 적어주세요"
-	            android:textColor="#232123"
+	            android:textColor="#232124"
 	            android:textSize="12sp"/>
     	 
     	 <EditText

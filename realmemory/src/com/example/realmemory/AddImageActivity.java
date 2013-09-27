@@ -125,7 +125,7 @@ public class AddImageActivity extends Activity {
 	    	
 	    	return false;
 	    }
-	    //액티비티로 복귀하였을때 이미지 세팅
+	    //액티비티로 복귀하였을때 이미지 세팅ㅋㅋㅋㅋ
 	    protected void onActivityResult(int requestCode, int resultCode, Intent imageData){
 	    	super.onActivityResult(requestCode, resultCode, imageData);
 	    	
