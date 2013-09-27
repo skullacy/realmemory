@@ -12,12 +12,22 @@ import android.view.MenuItem;
 
 public class MainActivity extends Activity {
 	
-	
+	private static String member_srl;
+	public static String getMember_srl() {
+		return member_srl;
+	}
+	public static void setMember_srl(String member_srl) {
+		MainActivity.member_srl = member_srl;
+	}
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        Intent intent = getIntent();
+        setMember_srl(intent.getExtras().get("member_srl").toString());
+        
        //asklgjaslk;dfh;aklsgjaskldfhasklg;asjdflkasjfdl
        //gklasjdflksagdlkasdfhasklfjaslkfjaslkfdj
     }
@@ -56,6 +66,10 @@ public class MainActivity extends Activity {
     	
     	return true;
     }
+
+
+
+	
    
    
     
