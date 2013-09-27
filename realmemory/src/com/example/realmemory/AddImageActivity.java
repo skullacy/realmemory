@@ -30,6 +30,9 @@ public class AddImageActivity extends Activity {
 				android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 		intent.setType("image/*");
 		intent.putExtra("crop", "true");  
+		intent.putExtra("aspectX", 1);
+		intent.putExtra("aspectY", 1);
+		intent.putExtra("scale", true);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, getTempUri());
 		intent.putExtra("outputFormat",
 				Bitmap.CompressFormat.JPEG.toString());
@@ -67,20 +70,24 @@ public class AddImageActivity extends Activity {
 	    	super.onActivityResult(requestCode, resultCode, imageData);
 	    	
 	    	switch(requestCode){
-	    	case REQ_CODE_PICK_IMAGE:
-	    		if(resultCode == RESULT_OK){
-	    			if(imageData != null){
-	    				String filePath = Environment.getExternalStorageDirectory() + "/temp.jpg";
-	    				//로그캣으로 경로 확인
-	    				System.out.println("path" + filePath);
-	    				//temp.jpg파일을 Bitmap으로 디코딩
-	    				Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
-	    				ImageView _image = (ImageView)findViewById(R.id.imageView);
-	    				_image.setImageBitmap(selectedImage);
-	    			}
-	    		}
-	    	break;
+		    	case REQ_CODE_PICK_IMAGE:
+		    	{
+		    		if(resultCode == RESULT_OK){
+		    			if(imageData != null){
+		    				String filePath = Environment.getExternalStorageDirectory() + "/temp.jpg";
+		    				//로그캣으로 경로 확인
+		    				System.out.println("path" + filePath);
+		    				//temp.jpg파일을 Bitmap으로 디코딩
+		    				Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
+		    				ImageView _image = (ImageView)findViewById(R.id.imageView);
+		    				_image.setImageBitmap(selectedImage);
+		    			}
+		    		}
+		    	break;
+		    	}
+	    	
 	    	}
+	    	
 	    }
 	
 }

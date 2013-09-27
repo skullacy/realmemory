@@ -4,12 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
     >
+    <RelativeLayout 
+    android:layout_width="100dp"
+    android:layout_height="100dp" 
+    >
     <ImageView 
         android:id="@+id/imageView"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginLeft="0dp"
-         >
-        
+        >
     </ImageView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+       	android:layout_alignBottom="@id/imageView"
+       	android:background="#55000000"
+       	android:text="button"
+       	android:textSize="10dp"
+       	android:textColor="#fff"/>
+    </RelativeLayout>
 </LinearLayout>
