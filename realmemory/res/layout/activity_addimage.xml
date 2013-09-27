@@ -8,20 +8,84 @@
     android:layout_width="100dp"
     android:layout_height="100dp" 
     >
-    <ImageView 
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="0dp"
-        >
-    </ImageView>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-       	android:layout_alignBottom="@id/imageView"
-       	android:background="#55000000"
-       	android:text="button"
-       	android:textSize="10dp"
-       	android:textColor="#fff"/>
+	    <ImageView 
+	        android:id="@+id/imageView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="0dp"
+	        >
+	    </ImageView>
+	    <Button
+	        android:layout_width="match_parent"
+	        android:layout_height="30dp"
+	       	android:layout_alignBottom="@id/imageView"
+	       	android:background="#55000000"
+	       	android:text="button"
+	       	android:textSize="10dp"
+	       	android:textColor="#fff"/>
     </RelativeLayout>
+    
+    <LinearLayout
+        android:orientation="horizontal" 
+        android:layout_width="match_parent"
+    	android:layout_height="50dp" >
+    	
+    	 <TextView 
+	            android:layout_width="wrap_content"
+	            android:layout_height="50dp"
+	            android:text="제목"
+	            android:textColor="#232123"
+	            android:textSize="12sp"/>
+    	 
+    	 <EditText
+	            android:id="@+id/subject"
+	            android:layout_width="match_parent"
+	            android:layout_height="50dp"
+	            android:textSize="12sp"
+	            />
+    </LinearLayout>
+    <Button
+        android:id="@+id/dateb"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="10dp"
+		/>
+    <LinearLayout
+    android:orientation="horizontal" 
+    android:layout_width="match_parent"
+	android:layout_height="50dp" >
+    	
+    	 <TextView 
+	            android:layout_width="wrap_content"
+	            android:layout_height="50dp"
+	            android:text="장소"
+	            android:textColor="#232123"
+	            android:textSize="12sp"/>
+    	 
+    	 <EditText
+	            android:layout_width="match_parent"
+	            android:layout_height="50dp"
+	            android:textSize="12sp"
+	            />
+    </LinearLayout>
+    <LinearLayout
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+	android:layout_height="wrap_content" >
+    	
+    	 <TextView 
+	            android:layout_width="wrap_content"
+	            android:layout_height="20dp"
+	            android:text="기억에 남는 일을 간단히 적어주세요"
+	            android:textColor="#232123"
+	            android:textSize="12sp"/>
+    	 
+    	 <EditText
+	            android:layout_width="match_parent"
+	            android:layout_height="40dp"
+	            android:textSize="12sp"
+	            />
+    </LinearLayout>
 </LinearLayout>

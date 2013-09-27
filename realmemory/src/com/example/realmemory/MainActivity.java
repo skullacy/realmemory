@@ -1,24 +1,14 @@
 package com.example.realmemory;
 
-import java.io.File;
-import java.io.IOException;
-
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
@@ -46,7 +36,6 @@ public class MainActivity extends Activity {
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-		String text =null;
 		
 		switch(item.getItemId()){
 		case R.id.item1:
@@ -56,20 +45,16 @@ public class MainActivity extends Activity {
 			break;
 			
 		case R.id.item2:
-			text = "Action item, icon only, always displayed";
 			break;
 		
 		case R.id.item3:
-			text = "Normal menu item";
 			break;
 			
 		default:
 			return false; 
 		}
-		//asldgkjasl;dkfhzslgdhsdalkjfa;slkdfjadsl;kfj
     	
     	return true;
-    	//asdflkjas;dlkfjassdf
     }
    
    
