@@ -48,8 +48,8 @@ public class IntroActivity extends Activity {
 		phoneNum = tm.getLine1Number();
 		
 		//어드민 테스트용 admin_nosignup : 디버그모드(등록안됨), admin_signup : 디버그모드(회원가입)
-		//phoneNum = "admin_nosignup";
-		phoneNum = "admin_signup";
+		phoneNum = "admin_nosignup";
+		//phoneNum = "admin_signup";
 		
 		h = new Handler();
 		h.postDelayed(irun, 1000);
@@ -90,7 +90,6 @@ public class IntroActivity extends Activity {
 
 	public String getStringFromUrl(String url, List<NameValuePair>[] params) throws UnsupportedEncodingException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(getInputStreamFromUrl(url, params), "utf-8"));
-		
 		StringBuffer sb = new StringBuffer();
 		
 		try{
@@ -137,6 +136,7 @@ public class IntroActivity extends Activity {
 				//닉네임 생성 액티비티로 이동
 				if(next_act.equals("regnickname")){
 					Intent i = new Intent(IntroActivity.this, RegnickActivity.class);
+					i.putExtra("phoneNum", IntroActivity.phoneNum.toString());
 					startActivity(i);
 					finish();
 					overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
