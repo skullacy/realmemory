@@ -43,7 +43,7 @@ public class IntroActivity extends Activity {
 		
 		loadingMsg = (TextView) findViewById(R.id.loading_msg);
 		
-		//현재 핸드폰의 전화번호 가져오기
+		//현재 핸드폰의 전화번호 가져오기sadfjkaslkgjsalkdfjaslkdhglskdjfaslkdfjsalkfdjjasdgasfasgsadfasdgasdfgasdfasfasf
 		TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 		phoneNum = tm.getLine1Number();
 		
