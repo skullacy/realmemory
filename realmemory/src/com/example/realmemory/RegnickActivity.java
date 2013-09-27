@@ -46,7 +46,7 @@ public class RegnickActivity extends Activity {
 	
 	ProgressDialog dialog;
 	AlertDialog.Builder alertDialog;
-	AlertHandler alert;
+	AlertHandler alert; 
 	
 	public static final int SEND_ALERT = 0;
 
