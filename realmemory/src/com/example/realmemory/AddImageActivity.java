@@ -49,7 +49,7 @@ public class AddImageActivity extends Activity {
 				Bitmap.CompressFormat.JPEG.toString());
 		startActivityForResult(intent, REQ_CODE_PICK_IMAGE);
 		
-		//날짜 다이어로그
+		//날짜 다이어로그xxxxxxxxxxxxxxxxxxxxxxxxx
 	    PickDate = (Button)findViewById(R.id.dateb); 
 	    PickDate.setOnClickListener(new View.OnClickListener()
 	    {                         
