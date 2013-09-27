@@ -64,8 +64,9 @@ public class MainActivity extends Activity {
 			break;
 			
 		default:
-			return false;
+			return false; 
 		}
+		//asldgkjasl;dkfhzslgdhsdalkjfa;slkdfjadsl;kfj
     	
     	return true;
     	
