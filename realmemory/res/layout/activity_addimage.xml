@@ -65,6 +65,7 @@
             android:textSize="12sp"/>
     	 
     	 <EditText
+    	    android:id="@+id/position"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textSize="12sp"
@@ -83,13 +84,14 @@
             android:textSize="12sp"/>
     	 
     	 <EditText
+    	    android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textSize="12sp"
             />
     </LinearLayout>
     <Button
-        android:id="@+id/dateb"
+        android:id="@+id/addimageSubmitBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"

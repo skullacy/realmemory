@@ -1,6 +1,7 @@
 package com.example.realmemory;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,6 +20,8 @@ import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.graphics.Bitmap;
+import android.util.Base64;
 import android.util.Log;
 
 public class CommServerJson {
@@ -33,9 +36,16 @@ public class CommServerJson {
 	
 	public List<NameValuePair> params;
 	public void setParam(String query, String value){
-		Log.e("query", query);
-		Log.e("value", value);
 		params.add(new BasicNameValuePair(query, value));
+	}
+	
+	public void insertImage(final Bitmap image){
+		ByteArrayOutputStream bao = new ByteArrayOutputStream();
+		image.compress(Bitmap.CompressFormat.JPEG, 90, bao);
+		byte[] ba = bao.toByteArray();
+		String ba1 = Base64.encodeToString(ba, Base64.DEFAULT);
+		setParam("image", ba1);
+		setParam("ext", "jpg");
 	}
 	
 	//constructor

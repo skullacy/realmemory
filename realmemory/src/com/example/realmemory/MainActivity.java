@@ -60,6 +60,8 @@ public class MainActivity extends Activity {
 		switch(item.getItemId()){
 		case R.id.item1:
 			Intent intent = new Intent(this, AddImageActivity.class);
+			intent.putExtra("member_srl", getMember_srl());
+			intent.putExtra("nick_name", getNick_name());
 			startActivity(intent);
 			
 			break;
