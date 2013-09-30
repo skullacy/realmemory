@@ -132,8 +132,10 @@ public class AddImageActivity extends Activity {
 	    	switch(requestCode){
 		    	case REQ_CODE_PICK_IMAGE:
 		    	{
-		    		if(resultCode == RESULT_OK){
-		    			if(imageData != null){
+		    		if(resultCode == RESULT_OK)
+		    		{
+		    			if(imageData != null)
+		    			{
 		    				String filePath = Environment.getExternalStorageDirectory() + "/temp.jpg";
 		    				//로그캣으로 경로 확인
 		    				System.out.println("path" + filePath);

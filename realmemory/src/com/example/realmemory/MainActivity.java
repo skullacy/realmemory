@@ -25,8 +25,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        Intent intent = getIntent();
-        setMember_srl(intent.getExtras().get("member_srl").toString());
+        Intent beforeintent = getIntent();
+        setMember_srl(beforeintent.getExtras().get("member_srl").toString());
         
        //asklgjaslk;dfh;aklsgjaskldfhasklg;asjdflkasjfdl
        //gklasjdflksagdlkasdfhasklfjaslkfjaslkfdj

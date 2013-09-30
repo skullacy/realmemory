@@ -9,7 +9,7 @@
         android:targetSdkVersion="17" />
     
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -35,5 +35,4 @@
         <activity android:name="RegnickActivity"></activity>
         <activity android:name="AddImageActivity"></activity>
     </application>
-
 </manifest>
