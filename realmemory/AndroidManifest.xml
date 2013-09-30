@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity 
-            android:name="MainActivity">
+            android:name="com.example.realmemory.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER"/>

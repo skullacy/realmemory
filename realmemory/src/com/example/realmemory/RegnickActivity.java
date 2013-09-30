@@ -1,21 +1,8 @@
 package com.example.realmemory;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 import org.json.JSONObject;
 
 
@@ -66,37 +53,37 @@ public class RegnickActivity extends Activity {
 			public void onClick(View v) {
 				EditText nick = (EditText) findViewById(R.id.nickname);
 				nick_name = nick.getText().toString();
+				dialog = new ProgressDialog(RegnickActivity.this);
+				dialog.setTitle("");
+				dialog.setMessage("서버에 등록중입니다.");
+				dialog.show();
+				alert = new AlertHandler();
 				regThread();
 			}
 		});
 	}
 	
 	public void regThread(){
-		dialog = new ProgressDialog(this);
-		dialog.setTitle("");
-		dialog.setMessage("서버에 등록중입니다.");
-		dialog.show();
-		alert = new AlertHandler();
 		new Thread(new Runnable(){
 			public void run(){
 				try{
-					List<NameValuePair> params = new ArrayList<NameValuePair>();
-					params.add(new BasicNameValuePair("module", "realmemory"));
-					params.add(new BasicNameValuePair("act", "procRealmemoryInsertNickname"));
-					params.add(new BasicNameValuePair("phone", phoneNum.toString()));
-					params.add(new BasicNameValuePair("nick_name", nick_name));
-					
-					//서버에 계정 등록
-					String line = getStringFromUrl("http://skullacytest.cafe24.com/", params);
-					Log.e("insert Account", line);
+					//서버와 통신
+					CommServerJson comm = new CommServerJson();
+					comm.setParam("module", "realmemory");
+					comm.setParam("act", "procRealmemoryInsertNickname");
+					comm.setParam("phone", phoneNum.toString());
+					comm.setParam("nick_name", nick_name);
+					JSONObject jsonobj = new JSONObject();
+					jsonobj = comm.getJSONData();
 					dialog.dismiss();
 					
 					//전송받은 결과 파싱후 처리
-					JSONObject jsonobj = new JSONObject(line);
 					if(jsonobj.getInt("error") == 0)
 					{
 						Log.e("insert Account", "success regist");
 						Intent i = new Intent(RegnickActivity.this, MainActivity.class);
+						i.putExtra("member_srl", jsonobj.getString("member_srl"))
+						 .putExtra("nick_name", jsonobj.getString("nick_name"));
 						
 						startActivity(i);
 						finish();
@@ -116,41 +103,6 @@ public class RegnickActivity extends Activity {
 		}).start();
 		
 		
-	}
-	
-	public String getStringFromUrl(String url, List<NameValuePair> params) throws UnsupportedEncodingException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(getInputStreamFromUrl(url, params), "utf-8"));
-		StringBuffer sb = new StringBuffer();
-		
-		try{
-			String line = null;
-			
-			while((line = br.readLine()) != null){
-				sb.append(line);
-			}
-		}
-		catch(IOException e){
-			e.printStackTrace();
-		}
-		
-		return sb.toString();
-	}
-	
-	public static InputStream getInputStreamFromUrl(String url, List<NameValuePair> params){
-		InputStream contentStream = null;
-		try{
-			HttpClient httpclient = new DefaultHttpClient();
-			HttpPost post = new HttpPost(url);
-			UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
-			post.setEntity(ent);
-			HttpResponse responsePost = httpclient.execute(post);
-			
-			contentStream = responsePost.getEntity().getContent();
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		return contentStream;
 	}
 	
 	public class AlertHandler extends Handler{

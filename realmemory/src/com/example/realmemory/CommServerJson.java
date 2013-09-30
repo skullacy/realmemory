@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -18,6 +19,8 @@ import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 public class CommServerJson {
 	private static String serverUrl;
 	public static String getServerUrl() {
@@ -28,13 +31,16 @@ public class CommServerJson {
 	}
 	
 	
-	private static List<NameValuePair> params;
+	public List<NameValuePair> params;
 	public void setParam(String query, String value){
+		Log.e("query", query);
+		Log.e("value", value);
 		params.add(new BasicNameValuePair(query, value));
 	}
 	
 	//constructor
 	CommServerJson(){
+		params = new ArrayList<NameValuePair>();
 		if(getServerUrl() == null){
 			setServerUrl("http://skullacytest.cafe24.com");
 		}
