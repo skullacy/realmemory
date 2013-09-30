@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 public class MainActivity extends Activity {
 	
+	//member_srl 설정
 	private static String member_srl;
 	public static String getMember_srl() {
 		return member_srl;
@@ -20,16 +21,25 @@ public class MainActivity extends Activity {
 		MainActivity.member_srl = member_srl;
 	}
 	
+	//nick_name 설정
+	private static String nick_name;
+	public static String getNick_name() {
+		return nick_name;
+	}
+	public static void setNick_name(String nick_name) {
+		MainActivity.nick_name = nick_name;
+	}
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        Intent beforeintent = getIntent();
-        setMember_srl(beforeintent.getExtras().get("member_srl").toString());
+
+        Intent intent = getIntent();
+        setMember_srl(intent.getExtras().get("member_srl").toString());
+        setNick_name(intent.getExtras().get("nick_name").toString());
         
-       //asklgjaslk;dfh;aklsgjaskldfhasklg;asjdflkasjfdl
-       //gklasjdflksagdlkasdfhasklfjaslkfjaslkfdj
     }
     
     
@@ -66,6 +76,7 @@ public class MainActivity extends Activity {
     	
     	return true;
     }
+	
 
 
 

@@ -1,21 +1,7 @@
 package com.example.realmemory;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,7 +12,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.widget.*;
 
 public class IntroActivity extends Activity {
@@ -60,13 +45,8 @@ public class IntroActivity extends Activity {
 		public void run() {
 			IntroActivity.loadingMsg.setText("서버와 통신하고 있습니다.");
 			
-			//전송할 파라미터 생성
-			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("module", "realmemory"));
-			params.add(new BasicNameValuePair("phone", phoneNum.toString()));
-			
 			//json 스레드 실행(서버접속 후 계정확인)
-			new JsonLoadingTask().execute(params);
+			new JsonLoadingTask().execute();
 		}
 	};
 	
@@ -76,56 +56,20 @@ public class IntroActivity extends Activity {
 		h.removeCallbacks(irun);
 	}
 	
-	public String getJsonText(List<NameValuePair>[] params){
-		try{
-			String line = getStringFromUrl("http://skullacytest.cafe24.com/", params);
-			Log.e("getJsonText", line);
-			return line;
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public String getStringFromUrl(String url, List<NameValuePair>[] params) throws UnsupportedEncodingException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(getInputStreamFromUrl(url, params), "utf-8"));
-		StringBuffer sb = new StringBuffer();
-		
-		try{
-			String line = null;
-			
-			while((line = br.readLine()) != null){
-				sb.append(line);
+	private class JsonLoadingTask extends AsyncTask<String, Void, String> {
+		protected String doInBackground(String... str) {
+			CommServerJson comm = new CommServerJson();
+			comm.setParam("module", "realmemory");
+			comm.setParam("phone", phoneNum.toString());
+			String data = null;
+			try {
+				data = comm.getData();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		}
-		catch(IOException e){
-			e.printStackTrace();
-		}
-		
-		return sb.toString();
-	}
-	
-	public static InputStream getInputStreamFromUrl(String url, List<NameValuePair>[] params){
-		InputStream contentStream = null;
-		try{
-			HttpClient httpclient = new DefaultHttpClient();
-			HttpPost post = new HttpPost(url);
-			UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params[0], HTTP.UTF_8);
-			post.setEntity(ent);
-			HttpResponse responsePost = httpclient.execute(post);
 			
-			contentStream = responsePost.getEntity().getContent();
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		return contentStream;
-	}
-	
-	private class JsonLoadingTask extends AsyncTask<List<NameValuePair>, Void, String> {
-		protected String doInBackground(List<NameValuePair>... params) {
-			return getJsonText(params);
+			return data;
 		}
 		
 		protected void onPostExecute(String result) {
