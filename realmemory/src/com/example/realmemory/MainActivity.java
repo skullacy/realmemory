@@ -9,12 +9,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.*;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class MainActivity extends Activity {
 	
 	//member_srl ¼³Á¤
-	private static String member_srl;
+	private static String member_srl; 
 	public static String getMember_srl() {
 		return member_srl;
 	}

@@ -48,7 +48,7 @@ public class CommServerJson {
 		setParam("ext", "jpg");
 	}
 	
-	//constructor
+	//constructor  
 	CommServerJson(){
 		params = new ArrayList<NameValuePair>();
 		if(getServerUrl() == null){
