@@ -25,6 +25,7 @@ public class AddImageActivity extends Activity {
 	
 	private static final String TEMP_PHOTO_FILE = "temp.jpg";
 	private static final int REQ_CODE_PICK_IMAGE = 0;
+	Bitmap selectedImage;
 	private Button      PickDate;
 	private int         mYear;    
 	private int         mMonth;    
@@ -140,7 +141,7 @@ public class AddImageActivity extends Activity {
 		    				//로그캣으로 경로 확인
 		    				System.out.println("path" + filePath);
 		    				//temp.jpg파일을 Bitmap으로 디코딩/////
-		    				Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
+		    				selectedImage = BitmapFactory.decodeFile(filePath);
 		    				ImageView _image = (ImageView)findViewById(R.id.imageView);
 		    				_image.setImageBitmap(selectedImage);
 		    			}
