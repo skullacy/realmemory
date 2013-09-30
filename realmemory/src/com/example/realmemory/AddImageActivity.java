@@ -139,7 +139,7 @@ public class AddImageActivity extends Activity {
 		    				String filePath = Environment.getExternalStorageDirectory() + "/temp.jpg";
 		    				//로그캣으로 경로 확인
 		    				System.out.println("path" + filePath);
-		    				//temp.jpg파일을 Bitmap으로 디코딩/
+		    				//temp.jpg파일을 Bitmap으로 디코딩/////
 		    				Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
 		    				ImageView _image = (ImageView)findViewById(R.id.imageView);
 		    				_image.setImageBitmap(selectedImage);
