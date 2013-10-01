@@ -34,5 +34,7 @@
         </activity>
         <activity android:name="RegnickActivity"></activity>
         <activity android:name="AddImageActivity"></activity>
+        <activity android:name="MainRightActivity"></activity>
+        <activity android:name="GrouplistActivity"></activity>
     </application>
 </manifest>

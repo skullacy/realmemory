@@ -32,12 +32,14 @@ public class MainActivity extends Activity {
 		MainActivity.nick_name = nick_name;
 	}
 	
+	SlidingMenu menu;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        menu = new SlidingMenu(this);
         
-        SlidingMenu menu = new SlidingMenu(this);
         menu.setMode(SlidingMenu.LEFT);
         menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
         menu.setShadowWidthRes(R.dimen.shadow_width);
@@ -54,6 +56,17 @@ public class MainActivity extends Activity {
         
     }
     
+    @Override
+	public void onBackPressed() {
+    	if(menu.isMenuShowing()){
+    		menu.showContent(true);
+    	}
+    	else{
+    		super.onBackPressed();
+    	}
+		
+		
+	}
     
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB) @SuppressLint("NewApi") @Override
