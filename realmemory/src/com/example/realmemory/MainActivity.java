@@ -1,5 +1,7 @@
 package com.example.realmemory;
 
+import java.io.UnsupportedEncodingException;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
@@ -7,6 +9,7 @@ import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.*;
@@ -51,6 +54,26 @@ public class MainActivity extends Activity {
         Intent intent = getIntent();
         setMember_srl(intent.getExtras().get("member_srl").toString());
         setNick_name(intent.getExtras().get("nick_name").toString());
+        
+        //skullacy added
+        //사진 리스트 불러오기
+        Thread thread = new Thread(new Runnable(){
+        	public void run(){
+        		CommServerJson comm = new CommServerJson();
+                comm.setParam("module", "realmemory");
+                comm.setParam("act", "dispRealmemoryGetGalleryList");
+                comm.setParam("member_srl", getMember_srl());
+                String result = null;
+                try {
+        			result = comm.getData();
+        		} catch (UnsupportedEncodingException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
+                Log.e("getGalleryList", result);
+        	}
+        });
+        thread.start();
         
     }
     
