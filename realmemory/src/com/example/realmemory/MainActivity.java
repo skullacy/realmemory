@@ -2,20 +2,22 @@ package com.example.realmemory;
 
 import java.io.UnsupportedEncodingException;
 
-import android.os.Build;
-import android.os.Bundle;
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.Intent;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.*;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
-public class MainActivity extends Activity {
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.ListFragment;
+import android.util.Log;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.example.realmemory.util.CommServerJson;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+
+public class MainActivity extends SlidingFragmentActivity {
 	
 	//member_srl 설정
 	private static String member_srl; 
@@ -35,23 +37,41 @@ public class MainActivity extends Activity {
 		MainActivity.nick_name = nick_name;
 	}
 	
-	SlidingMenu menu;
+	protected ListFragment mList;
+	private Fragment mContent;
 	
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        menu = new SlidingMenu(this);
-        
-        menu.setMode(SlidingMenu.LEFT);
-        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-        menu.setShadowWidthRes(R.dimen.shadow_width);
-        menu.setShadowDrawable(R.drawable.shadow);
-        menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-        menu.setFadeDegree(0.10f);
-        menu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
-        menu.setMenu(R.layout.grouplist);
-        
+ 		
+ 		if (savedInstanceState != null)
+			mContent = getSupportFragmentManager().getFragment(savedInstanceState, "mContent");
+		if (mContent == null)
+			mContent = new ContentFragment("list");	
+		
+		// 상위 fragment 설정
+		setContentView(R.layout.fragment_content);
+		getSupportFragmentManager()
+		.beginTransaction()
+		.replace(R.id.content_frame, mContent)
+		.commit();
+		
+		// 하위 fragment 설정(슬라이드메뉴 - 왼쪽)
+		setBehindContentView(R.layout.fragment_leftmenu);
+		getSupportFragmentManager()
+		.beginTransaction()
+		.replace(R.id.menu_frame, new LeftSlideListFragment())
+		.commit();
+		
+		SlidingMenu sm = getSlidingMenu();
+ 		sm.setShadowWidthRes(R.dimen.shadow_width);
+ 		sm.setShadowDrawable(R.drawable.shadow);
+ 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+ 		sm.setFadeDegree(0.35f);
+ 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+ 		
 
         Intent intent = getIntent();
         setMember_srl(intent.getExtras().get("member_srl").toString());
@@ -80,23 +100,17 @@ public class MainActivity extends Activity {
     }
     
     @Override
-	public void onBackPressed() {
-    	if(menu.isMenuShowing()){
-    		menu.showContent(true);
-    	}
-    	else{
-    		super.onBackPressed();
-    	}
-		
-		
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		getSupportFragmentManager().putFragment(outState, "mContent", mContent);
 	}
     
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB) @SuppressLint("NewApi") @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.mainbar, menu);
-        ActionBar actionBar = getActionBar();
+    	getSupportMenuInflater().inflate(R.menu.mainbar, menu);
+        ActionBar actionBar = getSupportActionBar();
         getActionBar().setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
         return true;
@@ -124,7 +138,7 @@ public class MainActivity extends Activity {
 			return false; 
 		}
     	
-    	return true;
+		return super.onOptionsItemSelected(item);
     }
 	
 

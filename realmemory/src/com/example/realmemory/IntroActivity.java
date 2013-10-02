@@ -5,6 +5,8 @@ import java.io.UnsupportedEncodingException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.realmemory.util.CommServerJson;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;

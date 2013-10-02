@@ -1,4 +1,4 @@
-package com.example.realmemory;
+package com.example.realmemory.util;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -49,7 +49,7 @@ public class CommServerJson {
 	}
 	
 	//constructor  
-	CommServerJson(){
+	public CommServerJson(){
 		params = new ArrayList<NameValuePair>();
 		if(getServerUrl() == null){
 			setServerUrl("http://skullacytest.cafe24.com");

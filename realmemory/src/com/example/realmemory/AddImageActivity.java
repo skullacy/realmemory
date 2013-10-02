@@ -1,11 +1,15 @@
 package com.example.realmemory;
 
+
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.example.realmemory.util.CommServerJson;
 
 import android.app.Activity;
 import android.app.AlertDialog;

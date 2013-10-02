@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.json.JSONObject;
 
+import com.example.realmemory.util.CommServerJson;
+
 
 import android.app.Activity;
 import android.app.AlertDialog;
